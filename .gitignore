@@ -4,6 +4,7 @@ bin/
 lib64
 pyvenv.cfg
 
+anythingllm/.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

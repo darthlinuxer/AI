@@ -8,11 +8,16 @@
 4. In Linux:
    1. Execute command: `bash 1.install_packages.sh`
    2. Execute command: `bash 2.create_virtual.environment.sh`
-   3. Execute command: `bash e.activate_virtual_environment.sh`
+   3. Execute command: `bash 3.activate_virtual_environment.sh`
    4. Execute command: `source ./bin/activate`
-   5. Install docker with `bash docker-install.sh`
+
+## Docker (skip if you already have docker installed)
+
+   5. Install docker with `bash docker-install.sh` 
    6. Add your user to the docker group: `sudo usermod -aG docker $USER`
    7. logout and login on your linux again... `exit`
+
+## Start docker service
    8. activate docker service: `service docker start`
    9. Execute command to open visual studio code in Linux: `code .`
    10. rename file `.env_template` to `.env`
