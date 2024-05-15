@@ -4,11 +4,10 @@ import sys
 # Get the current directory of the test file
 current_dir = os.path.dirname(os.path.realpath(__file__))
 
-database_dir = os.path.join(current_dir, "database")
-database_dir_str = str(database_dir)
+database_dir = os.path.join(current_dir, 'database')
 
 # Get the parent directory of the current directory (to access the ChromaRepository package)
-parent_dir = os.path.dirname(current_dir)
+parent_dir = os.path.dirname(os.path.dirname(current_dir))
 
 # Add the parent directory to the Python path
 sys.path.append(parent_dir)
@@ -25,8 +24,8 @@ from langchain_core.documents import Document
 from langchain_core.messages import AIMessage
 from langchain.storage import InMemoryStore
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from src.SuperSourceLoaderTransformer import SuperSourceLoaderTransformer
-from src.Rag import Rag
+from Rag.src.SuperSourceLoaderTransformer import SuperSourceLoaderTransformer
+from Rag.src.Rag import Rag
 
 from ChromaRepository.src import (
     ChromaRepository,
@@ -41,7 +40,7 @@ class TestRagMethods(unittest.TestCase):
     def setUpClass(cls):
         try:
             cls.vectorrepository: IVectorRepository = ChromaRepository(
-                persist_directory=database_dir_str,
+                persist_directory=str(database_dir),
                 collection_name="youtube",
                 embedding_function=OpenAIEmbeddings(
                     api_key=OPENAI_API_KEY,
