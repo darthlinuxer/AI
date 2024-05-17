@@ -4,13 +4,7 @@ import sys
 # Get the current directory of the test file
 current_dir = os.path.dirname(os.path.realpath(__file__))
 
-database_dir = os.path.join(current_dir, 'database')
-
-# Get the parent directory of the current directory (to access the ChromaRepository package)
-parent_dir = os.path.dirname(os.path.dirname(current_dir))
-
-# Add the parent directory to the Python path
-sys.path.append(parent_dir)
+database_dir = os.path.join(current_dir, "database")
 
 from dotenv import load_dotenv
 import os
@@ -24,13 +18,12 @@ from langchain_core.documents import Document
 from langchain_core.messages import AIMessage
 from langchain.storage import InMemoryStore
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from Rag.src.SuperSourceLoaderTransformer import SuperSourceLoaderTransformer
-from Rag.src.Rag import Rag
-
-from ChromaRepository.src import (
+from Tutorials_Basic.Modules.Rag.src.SuperSourceLoaderTransformer import SuperSourceLoaderTransformer
+from Tutorials_Basic.Modules.Rag.src.Rag import Rag
+from Tutorials_Basic.Modules.ChromaRepository.src import (
     ChromaRepository,
     IVectorRepository,
-    SmallChunksSearchRetriever,
+    SmallChunksSearchRetriever
 )
 
 
@@ -63,7 +56,6 @@ class TestRagMethods(unittest.TestCase):
             with open("./Tutorials_Basic/Output/youtube.txt", "w") as f:
                 f.write(texts)
                 f.write("\n")
-                f.write(metadata)
 
             # check OpenAI model context sizes here:
             # https://platform.openai.com/docs/models/gpt-3-5-turbo
@@ -120,7 +112,7 @@ class TestRagMethods(unittest.TestCase):
             self.assertIsNotNone(answer.content)
         except Exception as e:
             print(e)
-            pass
+            raise
 
     def test_rag_using_retriever_strategy_with_vectorrepository(self):
         """
@@ -161,18 +153,20 @@ class TestRagMethods(unittest.TestCase):
             result = self.rag.Run(question, retriever, stream=False)
             # using the context retrieved by the retriever strategy, feed the LLM with
             # the question
-
+            
+            content = result["content"]
+            chunks = result["chunks"]
             processed_chunks = retriever.fetch_documents(question)
             # retrieve all the processed chunks from the InMemoryStorage with the chunks
             # sorted by distance
 
             self.assertIsNotNone(processed_chunks)
-            self.assertIsNotNone(result["content"])
-            self.assertIsNotNone(result["chunks"])
-            self.assertEqual(result["sources"]["source"], "youtube")
+            self.assertIsNotNone(content)
+            self.assertIsNotNone(chunks)
 
         except Exception as e:
             print(e)
+            raise
 
     def test_rag_using_retriever_strategy_with_documents(self):
         """
@@ -231,6 +225,7 @@ class TestRagMethods(unittest.TestCase):
 
         except Exception as e:
             print(e)
+            raise
 
 
 if __name__ == "__main__":

@@ -9,7 +9,7 @@
    1. Execute command: `bash 1.install_packages.sh`
    2. Execute command: `bash 2.create_virtual.environment.sh`
    3. Execute command: `bash 3.activate_virtual_environment.sh`
-   4. Execute command: `source ./bin/activate`
+   4. Execute command: `source venv/bin/activate`
 
 ## Docker (skip if you already have docker installed)
 
