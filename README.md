@@ -23,7 +23,8 @@
    10. rename file `.env_template` to `.env`
 5. Access [OpenAI](https://openai.com/) and create an API KEY and copy paste it to `.env`file
 6. Access [GroqCloud](https://console.groq.com/keys),create an API KEY and copy and paste it to the `.env` file
-   
+7. Access [Anthropic](https://console.anthropic.com/),create an API KEY and copy and paste it to the `.env` file)
+8. Access [TavilySearch](https://www.tavily.com/), create an API KEY and copy and paste it to the `.env` file
 
 ### Recommended Extensions
 
