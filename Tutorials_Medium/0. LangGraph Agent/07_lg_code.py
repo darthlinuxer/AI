@@ -40,16 +40,16 @@ def route_tools(state: State):
     else:
         raise ValueError(f"No messages found in input state to tool_edge: {state}")
     
+    print(ai_message)
     if hasattr(ai_message, "tool_calls") and len(ai_message.tool_calls) > 0:
         return "tools"
     return END
 
 graph_builder = StateGraph(State)
-tool_node = ToolNode(tools=tools)
 graph_builder.add_node("chatbot", chatbot)
 graph_builder.set_entry_point("chatbot")
 graph_builder.set_finish_point("chatbot")
-graph_builder.add_node("tools", tool_node)
+graph_builder.add_node("tools", ToolNode(tools))
 graph_builder.add_edge("tools", "chatbot")
 graph_builder.add_conditional_edges(
     "chatbot",
